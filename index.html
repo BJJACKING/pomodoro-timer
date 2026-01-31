@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>番茄工作法计时器</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-clock"></i> 番茄工作法计时器</h1>
+            <p class="subtitle">专注工作25分钟，休息5分钟</p>
+        </header>
+
+        <main>
+            <div class="timer-container">
+                <div class="timer-display">
+                    <div class="time" id="time">25:00</div>
+                    <div class="timer-label" id="timer-label">专注时间</div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+
+                <div class="controls">
+                    <button id="start-btn" class="btn btn-primary">
+                        <i class="fas fa-play"></i> 开始
+                    </button>
+                    <button id="pause-btn" class="btn btn-secondary" disabled>
+                        <i class="fas fa-pause"></i> 暂停
+                    </button>
+                    <button id="reset-btn" class="btn btn-secondary">
+                        <i class="fas fa-redo"></i> 重置
+                    </button>
+                    <button id="skip-btn" class="btn btn-secondary">
+                        <i class="fas fa-forward"></i> 跳过
+                    </button>
+                </div>
+
+                <div class="mode-selector">
+                    <button class="mode-btn active" data-mode="work">
+                        <i class="fas fa-briefcase"></i> 工作 (25分钟)
+                    </button>
+                    <button class="mode-btn" data-mode="short-break">
+                        <i class="fas fa-coffee"></i> 短休息 (5分钟)
+                    </button>
+                    <button class="mode-btn" data-mode="long-break">
+                        <i class="fas fa-utensils"></i> 长休息 (15分钟)
+                    </button>
+                </div>
+            </div>
+
+            <div class="stats-container">
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="completed-sessions">0</div>
+                        <div class="stat-label">完成番茄数</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="total-time">0</div>
+                        <div class="stat-label">总专注时间(分钟)</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="today-sessions">0</div>
+                        <div class="stat-label">今日番茄数</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-container">
+                <h2><i class="fas fa-tasks"></i> 任务列表</h2>
+                <div class="task-input">
+                    <input type="text" id="task-input" placeholder="添加新任务...">
+                    <button id="add-task-btn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> 添加
+                    </button>
+                </div>
+                <ul class="task-list" id="task-list">
+                    <!-- 任务将通过JS动态添加 -->
+                </ul>
+            </div>
+
+            <div class="settings">
+                <h2><i class="fas fa-cog"></i> 设置</h2>
+                <div class="setting-item">
+                    <label for="work-duration">工作时间 (分钟):</label>
+                    <input type="number" id="work-duration" min="1" max="60" value="25">
+                </div>
+                <div class="setting-item">
+                    <label for="short-break-duration">短休息 (分钟):</label>
+                    <input type="number" id="short-break-duration" min="1" max="30" value="5">
+                </div>
+                <div class="setting-item">
+                    <label for="long-break-duration">长休息 (分钟):</label>
+                    <input type="number" id="long-break-duration" min="1" max="60" value="15">
+                </div>
+                <div class="setting-item">
+                    <label for="auto-start">自动开始下一个阶段:</label>
+                    <input type="checkbox" id="auto-start" checked>
+                </div>
+                <div class="setting-item">
+                    <label for="sound-alert">声音提醒:</label>
+                    <input type="checkbox" id="sound-alert" checked>
+                </div>
+                <button id="save-settings" class="btn btn-primary">
+                    <i class="fas fa-save"></i> 保存设置
+                </button>
+            </div>
+        </main>
+
+        <footer>
+            <p>番茄工作法：每25分钟工作后休息5分钟，每完成4个番茄钟后休息15-30分钟</p>
+            <p class="tips">
+                <i class="fas fa-lightbulb"></i> 提示：选择一个任务，开始番茄钟，期间避免任何干扰
+            </p>
+        </footer>
+    </div>
+
+    <!-- 声音提醒 -->
+    <audio id="timer-sound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
